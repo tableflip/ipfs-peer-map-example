@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>IPFS peer map example</title>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel="stylesheet">
+  <style>
+    #map {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .peer {
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+      cursor: pointer;
+    }
+    .hidden {
+      opacity: 0
+    }
+    .mapboxgl-popup-content {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js"></script>
+  <script src="bundle.js"></script>
+</body>
+</html>

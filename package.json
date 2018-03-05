@@ -1,0 +1,51 @@
+{
+  "name": "ipfs-peer-map-example",
+  "version": "0.0.0",
+  "description": "A map of IPv4 IPFS peers that uses window.ipfs",
+  "main": "dist/index.html",
+  "scripts": {
+    "start": "ecstatic dist",
+    "clean": "shx rm -rf dist",
+    "build": "run-s build:*",
+    "build:copy": "run-p build:copy:*",
+    "build:copy:html": "shx mkdir -p dist && shx cp src/index.html dist/index.html",
+    "build:copy:images": "shx mkdir -p dist/images && shx cp src/images/* dist/images",
+    "build:js": "browserify -t envify -g uglifyify src/main.js -o dist/bundle.js",
+    "watch": "npm-run-all build:copy --parallel watch:*",
+    "watch:js": "watchify -t envify src/main.js -o dist/bundle.js -v",
+    "watch:serve": "ecstatic --cache=0 dist",
+    "test": "standard"
+  },
+  "author": "Alan Shaw",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^16.1.0",
+    "ecstatic": "^3.2.0",
+    "envify": "^4.1.0",
+    "npm-run-all": "^4.1.2",
+    "shx": "^0.2.2",
+    "standard": "^11.0.0",
+    "uglifyify": "^4.0.5",
+    "watchify": "^3.11.0"
+  },
+  "dependencies": {
+    "ipfs-geoip": "^2.3.0",
+    "mapbox-gl": "^0.44.1",
+    "queue": "^4.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tableflip/ipfs-peer-map-example.git"
+  },
+  "keywords": [
+    "ipfs",
+    "peer",
+    "p2p",
+    "map",
+    "webgl"
+  ],
+  "bugs": {
+    "url": "https://github.com/tableflip/ipfs-peer-map-example/issues"
+  },
+  "homepage": "https://github.com/tableflip/ipfs-peer-map-example#readme"
+}
