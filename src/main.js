@@ -39,7 +39,7 @@ getIpfs((err, ipfs) => {
         .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(popupText))
         .addTo(map)
 
-      setTimeout(() => { img.className = 'peer' }, 300)
+      setTimeout(() => { img.className = 'peer heartbeat' }, 300)
     })
     .on('remove', id => {
       if (markers[id]) {
