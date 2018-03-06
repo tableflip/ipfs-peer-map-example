@@ -28,7 +28,7 @@ class PeerEmitter extends EventEmitter {
 }
 
 // events 'add' { id, location }
-//        'remove' [id]
+//        'remove' id
 // Note ID is BS58 encoded
 class PeerLocationEmitter extends EventEmitter {
   constructor (ipfs, opts) {
@@ -56,6 +56,9 @@ class PeerLocationEmitter extends EventEmitter {
       return peers.every(p => getPeerId(p) !== id)
     })
 
+    console.log('added', added.length)
+    console.log('removed', removed.length)
+
     added.forEach(p => {
       const id = getPeerId(p)
       this._peers[id] = { location: null }
@@ -64,11 +67,16 @@ class PeerLocationEmitter extends EventEmitter {
         if (!this._peers[id]) return cb()
 
         const ipv4Tuples = p.addr.stringTuples().filter(t => t[0] === 4)
-        if (!ipv4Tuples.length) return
+
+        if (!ipv4Tuples.length) {
+          console.log(`cannot lookup non IPv4 addr ${p.addr}`)
+          return cb()
+        }
 
         geoip.lookup(this._ipfs, ipv4Tuples[0][1], (err, location) => {
           if (err) return cb(err)
           if (!this._peers[id]) return cb()
+          console.log(`successful lookup for ${p.addr}`)
           this._peers[id].location = location
           cb()
           this.emit('add', { id, location })
@@ -76,21 +84,12 @@ class PeerLocationEmitter extends EventEmitter {
       })
     })
 
-    removed.forEach(id => {
-      delete this._peers[id]
-    })
-
-    this.emit('remove', removed)
+    removed.forEach(id => { delete this._peers[id] })
+    removed.forEach(id => this.emit('remove', id))
   }
 
   _onQueueError (err) {
     this.emit('error', err)
-  }
-
-  getPeerLocation (id) {
-    const peer = this._peers[id]
-    if (!peer) return null
-    return Object.assign({}, peer.location)
   }
 
   destroy () {

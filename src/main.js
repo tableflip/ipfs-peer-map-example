@@ -41,11 +41,11 @@ getIpfs((err, ipfs) => {
 
       setTimeout(() => { img.className = 'peer' }, 300)
     })
-    .on('remove', ids => {
-      ids.forEach(id => {
-        if (markers[id]) markers[id].remove()
+    .on('remove', id => {
+      if (markers[id]) {
+        markers[id].remove()
         delete markers[id]
-      })
+      }
     })
     .on('error', err => console.error('Peer location error', err))
 })
