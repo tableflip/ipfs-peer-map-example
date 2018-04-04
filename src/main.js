@@ -1,6 +1,7 @@
 /* global mapboxgl */
 
-const { getIpfs, PeerLocationEmitter } = require('./ipfs')
+const getIpfs = require('window.ipfs-fallback')
+const { PeerLocationEmitter } = require('./peer-location')
 
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
@@ -13,9 +14,7 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl(), 'top-left')
 
-getIpfs((err, ipfs) => {
-  if (err) throw err
-
+getIpfs().then(ipfs => {
   const markers = {}
 
   new PeerLocationEmitter(ipfs)

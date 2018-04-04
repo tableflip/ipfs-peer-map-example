@@ -31,7 +31,8 @@
   "dependencies": {
     "ipfs-geoip": "^2.3.0",
     "mapbox-gl": "^0.44.1",
-    "queue": "^4.4.2"
+    "queue": "^4.4.2",
+    "window.ipfs-fallback": "^1.0.0"
   },
   "repository": {
     "type": "git",

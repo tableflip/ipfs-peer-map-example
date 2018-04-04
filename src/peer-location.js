@@ -106,23 +106,3 @@ class PeerLocationEmitter extends EventEmitter {
 }
 
 exports.PeerLocationEmitter = PeerLocationEmitter
-
-const getIpfs = (cb) => {
-  if (window.ipfs) {
-    console.log('window.ipfs is available!')
-    return process.nextTick(() => cb(null, window.ipfs))
-  }
-
-  console.log('window.ipfs is not available, downloading from CDN...')
-  const script = document.createElement('script')
-  script.src = 'https://unpkg.com/ipfs/dist/index.min.js'
-  script.onload = () => {
-    console.log('starting IPFS node')
-    const ipfs = new window.Ipfs()
-    ipfs.once('ready', () => cb(null, ipfs))
-  }
-  script.onerror = cb
-  document.body.appendChild(script)
-}
-
-exports.getIpfs = getIpfs
