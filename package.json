@@ -1,6 +1,6 @@
 {
   "name": "ipfs-peer-map-example",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A map of IPv4 IPFS peers that uses window.ipfs",
   "main": "dist/index.html",
   "scripts": {
