@@ -23,14 +23,14 @@
     "ecstatic": "^3.2.0",
     "envify": "^4.1.0",
     "npm-run-all": "^4.1.2",
-    "shx": "^0.2.2",
+    "shx": "^0.3.2",
     "standard": "^11.0.0",
-    "uglifyify": "^4.0.5",
+    "uglifyify": "^5.0.1",
     "watchify": "^3.11.0"
   },
   "dependencies": {
     "ipfs-geoip": "^2.3.0",
-    "mapbox-gl": "^0.44.1",
+    "mapbox-gl": "^0.47.0",
     "queue": "^4.4.2",
     "window.ipfs-fallback": "^1.0.0"
   },
